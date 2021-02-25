@@ -1,1 +1,44 @@
 /* Other rules */
+@import "./assets/fonts/stylesheet.css";
+
+body {
+  background-color: #f6f1eb;
+}
+.container {
+  max-width: 1270px;
+  margin: 0 auto;
+}
+.card-container {
+  margin-top: 35px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.card-container div:nth-child(4n) {
+  margin-right: 0px;
+}
+.button-div {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+@media (max-width: 1680px) {
+  .container {
+    max-width: 960px;
+  }
+  .card-container div:nth-child(3n) {
+    margin-right: 0px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    max-width: 630px;
+  }
+  .card-container div:nth-child(2n) {
+    margin-right: 0px;
+  }
+}
+@media (max-width: 640px) {
+  .container {
+    margin: 0 10px;
+  }
+}

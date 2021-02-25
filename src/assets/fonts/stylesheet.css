@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'HelveticaLTW01-Roman';
+    src: url('HelveticaLTW01-Roman.eot');
+    src: url('HelveticaLTW01-Roman.eot?#iefix') format('embedded-opentype'),
+        url('HelveticaLTW01-Roman.woff2') format('woff2'),
+        url('HelveticaLTW01-Roman.woff') format('woff'),
+        url('HelveticaLTW01-Roman.ttf') format('truetype'),
+        url('HelveticaLTW01-Roman.svg#HelveticaLTW01-Roman') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Orator W01';
+    src: url('OratorW01-Medium.eot');
+    src: url('OratorW01-Medium.eot?#iefix') format('embedded-opentype'),
+        url('OratorW01-Medium.woff2') format('woff2'),
+        url('OratorW01-Medium.woff') format('woff'),
+        url('OratorW01-Medium.ttf') format('truetype'),
+        url('OratorW01-Medium.svg#OratorW01-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
