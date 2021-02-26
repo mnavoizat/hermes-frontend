@@ -10,80 +10,137 @@ const Home = () => {
   const [countries, setCountries] = useState();
   const [contracts, setContracts] = useState();
   const [jobs, setJobs] = useState();
+  const [countriesFilters, setCountriesFilters] = useState();
+  const [contractsFilters, setContractsFilters] = useState();
+  const [jobsFilters, setJobsFilters] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const initializeStates = () => {
+    const initializeFilters = () => {
+      let newCountries = {};
+      let newContracts = {};
+      let newJobs = {};
+      let newCountriesFilters = {};
+      let newContractsFilters = {};
+      let newJobsFilters = {};
+
+      for (let i = 0; i < data.length; i++) {
+        if (!newCountries.hasOwnProperty(data[i].country)) {
+          newCountriesFilters[data[i].country] = false;
+        }
+        if (!newContracts.hasOwnProperty(data[i].contract)) {
+          newContractsFilters[data[i].contract] = false;
+        }
+        if (!newJobs.hasOwnProperty(data[i].title)) {
+          newJobsFilters[data[i].title] = false;
+        }
+      }
+
+      setCountriesFilters(newCountriesFilters);
+      setContractsFilters(newContractsFilters);
+      setJobsFilters(newJobsFilters);
+    };
+
+    initializeFilters();
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    const selectData = () => {
+      let newSelectedCountries = [];
+      let newSelectedContracts = [];
+      let newSelectedJobs = [];
+
+      for (let i = 0; i < data.length; i++) {
+        if (countriesFilters[data[i].country]) {
+          newSelectedCountries.push(data[i]);
+        }
+        if (contractsFilters[data[i].contract]) {
+          newSelectedContracts.push(data[i]);
+        }
+        if (jobsFilters[data[i].title]) {
+          newSelectedJobs.push(data[i]);
+        }
+      }
+
+      if (newSelectedCountries.length === 0) {
+        newSelectedCountries = [...data];
+      }
+      if (newSelectedContracts.length === 0) {
+        newSelectedContracts = [...data];
+      }
+      if (newSelectedJobs.length === 0) {
+        newSelectedJobs = [...data];
+      }
+
+      setSelectedData(
+        newSelectedCountries
+          .filter((value) => newSelectedContracts.includes(value))
+          .filter((value) => newSelectedJobs.includes(value))
+      );
+    };
+
+    if (!isLoading) {
+      selectData();
+    }
+  }, [isLoading, countriesFilters, contractsFilters, jobsFilters]);
+
+  useEffect(() => {
+    const displayFilters = () => {
       let newCountries = {};
       let newContracts = {};
       let newJobs = {};
 
-      for (let i = 0; i < data.length; i++) {
-        if (newCountries.hasOwnProperty(data[i].country)) {
-          newCountries[data[i].country].count++;
+      for (let i = 0; i < selectedData.length; i++) {
+        if (newCountries.hasOwnProperty(selectedData[i].country)) {
+          newCountries[selectedData[i].country]++;
         } else {
-          newCountries[data[i].country] = { count: 1, filter: true };
+          newCountries[selectedData[i].country] = 1;
         }
-        if (newContracts.hasOwnProperty(data[i].contract)) {
-          newContracts[data[i].contract].count++;
+        if (newContracts.hasOwnProperty(selectedData[i].contract)) {
+          newContracts[selectedData[i].contract]++;
         } else {
-          newContracts[data[i].contract] = { count: 1, filter: true };
+          newContracts[selectedData[i].contract] = 1;
         }
-        if (newJobs.hasOwnProperty(data[i].title)) {
-          newJobs[data[i].title].count++;
+        if (newJobs.hasOwnProperty(selectedData[i].title)) {
+          newJobs[selectedData[i].title]++;
         } else {
-          newJobs[data[i].title] = { count: 1, filter: true };
+          newJobs[selectedData[i].title] = 1;
         }
       }
-      console.log(newCountries);
-      console.log(newContracts);
-      console.log(newJobs);
+
       setCountries(newCountries);
       setContracts(newContracts);
       setJobs(newJobs);
-
-      setIsLoading(false);
     };
-    initializeStates();
-  }, []);
-
-  useEffect(() => {
     if (!isLoading) {
-      let newSelectedData = [];
-      for (let i = 0; i < data.length; i++) {
-        if (
-          countries[data[i].country].filter &&
-          contracts[data[i].contract].filter &&
-          jobs[data[i].title].filter
-        ) {
-          newSelectedData.push(data[i]);
-        }
-      }
-      setSelectedData(newSelectedData);
-      console.log(newSelectedData);
+      displayFilters();
     }
-  }, [isLoading, countries, contracts, jobs]);
+  }, [isLoading, selectedData]);
 
   return isLoading ? null : (
-    <div className="home">
+    <div>
       <div className="container">
         <FilterBar
           count={selectedData.length}
           countries={countries}
-          setCountries={setCountries}
+          countriesFilters={countriesFilters}
+          setCountriesFilters={setCountriesFilters}
           contracts={contracts}
-          setContracts={setContracts}
+          contractsFilters={contractsFilters}
+          setContractsFilters={setContractsFilters}
           jobs={jobs}
-          setJobs={setJobs}
+          jobsFilters={jobsFilters}
+          setJobsFilters={setJobsFilters}
         />
         <div className="card-container">
           {selectedData.map((item, index) => {
             return <Card key={index} index={index} item={item} />;
           })}
         </div>
-        <div className="button-div">
-          <Button>Voir plus d'opportunités</Button>
-        </div>
+        <ButtonDiv>
+          <button>Voir plus d'opportunités</button>
+        </ButtonDiv>
       </div>
     </div>
   );
@@ -91,14 +148,20 @@ const Home = () => {
 
 export default Home;
 
-const Button = styled.button`
-  background-color: #444;
-  color: #fff;
-  padding: 12px 40px;
-  border: none;
-  border-radius: 5px;
-  box-sizing: border-box;
-  font-family: Courier New, Courier, monospace;
-  margin-top: 20px;
-  cursor: pointer;
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-bottom: 40px;
+
+  button {
+    background-color: #444;
+    color: #fff;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: Courier New, Courier, monospace;
+    margin-top: 20px;
+    cursor: pointer;
+  }
 `;

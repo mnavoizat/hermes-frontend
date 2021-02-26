@@ -16,11 +16,7 @@ body {
 .card-container div:nth-child(4n) {
   margin-right: 0px;
 }
-.button-div {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 40px;
-}
+
 @media (max-width: 1680px) {
   .container {
     max-width: 960px;

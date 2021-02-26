@@ -6,11 +6,14 @@ import FiltersMenu from "./FiltersMenu";
 const FilterBar = ({
   count,
   countries,
-  setCountries,
+  countriesFilters,
+  setCountriesFilters,
   contracts,
-  setContracts,
+  contractsFilters,
+  setContractsFilters,
   jobs,
-  setJobs,
+  jobsFilters,
+  setJobsFilters,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -27,6 +30,27 @@ const FilterBar = ({
           }}
         >
           <p>Filtres</p>
+          {(Object.values(countriesFilters).includes(true) ||
+            Object.values(contractsFilters).includes(true) ||
+            Object.values(jobsFilters).includes(true)) && (
+            <p>
+              {" "}
+              :{" "}
+              <span>
+                {[
+                  Object.values(countriesFilters).includes(true),
+                  Object.values(contractsFilters).includes(true),
+                  Object.values(jobsFilters).includes(true),
+                ].reduce((acc, curr) => {
+                  if (curr) {
+                    acc++;
+                  }
+                  return acc;
+                })}{" "}
+                choix
+              </span>
+            </p>
+          )}
           {isOpen ? (
             <FontAwesomeIcon icon="angle-up" size="lg" />
           ) : (
@@ -37,11 +61,14 @@ const FilterBar = ({
       {isOpen && (
         <FiltersMenu
           countries={countries}
-          setCountries={setCountries}
+          countriesFilters={countriesFilters}
+          setCountriesFilters={setCountriesFilters}
           contracts={contracts}
-          setContracts={setContracts}
+          contractsFilters={contractsFilters}
+          setContractsFilters={setContractsFilters}
           jobs={jobs}
-          setJobs={setJobs}
+          jobsFilters={jobsFilters}
+          setJobsFilters={setJobsFilters}
         />
       )}
     </div>
@@ -81,6 +108,10 @@ const FilterDiv = styled.div`
       font-size: 20px;
       line-height: 20px;
       margin-right: 10px;
+
+      span {
+        text-decoration: underline;
+      }
     }
   }
 `;

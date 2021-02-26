@@ -41,25 +41,33 @@ const CardDiv = styled.div`
   color: #4a4a4a;
   border: solid 6px #f6f1eb;
   font-family: Helvetica, Helvetica W01, Arial, sans-serif;
+  cursor: pointer;
   margin-right: calc((70px - 8 * 6px) / 3);
 
   &:hover {
-    color: white;
     border: solid 6px #fffcf7;
+    & div:first-child {
+      h2 {
+      font-weight: bold;
+      }
+    }
     ${({ index }) =>
       (index + 1) % 5 === 0
         ? `
         background-color: #f8c5af;`
         : (index + 1) % 5 === 4
         ? `
+        color: white;
         background-color: #039fe3;`
         : (index + 1) % 5 === 3
         ? `
         background-color: #fe0;`
         : (index + 1) % 5 === 2
         ? `
+        color: white;
         background-color: #3ea535;`
         : `
+        color: white;
       background-color: #e30413;
 `}
   }

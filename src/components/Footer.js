@@ -115,7 +115,7 @@ const FooterDiv = styled.div`
         > div:nth-child(2) {
           flex: 1;
           flex-direction: column;
-          justify-content: space-around;
+          justify-content: space-evenly;
           align-items: start;
           button {
             padding-left: 0;
@@ -128,11 +128,15 @@ const FooterDiv = styled.div`
           display: none;
         }
         .icon > * {
-          margin-left: 30px;
+          margin: 0 20px;
         }
+      }
+      > div:last-child {
+        padding-top: 30px;
       }
     }
     @media (max-width: 640px) {
+      padding: 0 20px;
     }
   }
 `;

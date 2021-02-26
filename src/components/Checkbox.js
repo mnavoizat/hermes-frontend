@@ -2,20 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Checkbox = ({ item, object, setObject }) => {
+const Checkbox = ({ item, counts, filters, setFilters }) => {
   return (
     <CheckboxDiv>
       <button
         onClick={() => {
-          const newObject = { ...object };
-          newObject[item].filter = !newObject[item].filter;
-          setObject(newObject);
+          const newFilters = { ...filters };
+          newFilters[item] = !newFilters[item];
+          setFilters(newFilters);
         }}
       >
-        {object[item].filter && <FontAwesomeIcon icon="check" size="xs" />}
+        {filters[item] && <FontAwesomeIcon icon="check" size="xs" />}
       </button>
       <p>
-        {item} ({object[item].count})
+        {item} ({counts[item]})
       </p>
     </CheckboxDiv>
   );

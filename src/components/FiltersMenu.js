@@ -4,11 +4,14 @@ import Checkbox from "./Checkbox";
 
 const FiltersMenu = ({
   countries,
-  setCountries,
+  countriesFilters,
+  setCountriesFilters,
   contracts,
-  setContracts,
+  contractsFilters,
+  setContractsFilters,
   jobs,
-  setJobs,
+  jobsFilters,
+  setJobsFilters,
 }) => {
   return (
     <FiltersMenuDiv>
@@ -20,8 +23,9 @@ const FiltersMenu = ({
               <Checkbox
                 item={item}
                 key={index}
-                object={countries}
-                setObject={setCountries}
+                counts={countries}
+                filters={countriesFilters}
+                setFilters={setCountriesFilters}
               />
             );
           })}
@@ -33,8 +37,9 @@ const FiltersMenu = ({
               <Checkbox
                 item={item}
                 key={index}
-                object={contracts}
-                setObject={setContracts}
+                counts={contracts}
+                filters={contractsFilters}
+                setFilters={setContractsFilters}
               />
             );
           })}
@@ -47,8 +52,9 @@ const FiltersMenu = ({
             <Checkbox
               item={item}
               key={index}
-              object={jobs}
-              setObject={setJobs}
+              counts={jobs}
+              filters={jobsFilters}
+              setFilters={setJobsFilters}
             />
           );
         })}

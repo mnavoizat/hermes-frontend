@@ -9,12 +9,16 @@ const Header = () => {
     <HeaderDiv>
       <div className="container">
         <div>
-          <button>
+          <button className="house-text">
             <img src={house} alt="house" />
             <span>Hermes.com</span>
           </button>
+        </div>
+        <div>
           <img src={logo} alt="logo hermes" />
-          <button>
+        </div>
+        <div>
+          <button className="cand-text">
             <img src={edit} alt="edit" />
             <span>Candidature spontannée</span>
           </button>
@@ -31,28 +35,57 @@ const HeaderDiv = styled.div`
   box-shadow: 0 8px 16px rgb(217, 207, 197, 0.15);
   box-sizing: border-box;
   div {
-    div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    > div {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+    > div:first-child {
+      justify-content: start;
+    }
+    > div:last-child {
+      justify-content: flex-end;
+    }
+    img {
+      width: 70px;
+      height: 40px;
+    }
+    button {
+      border: none;
+      background-color: transparent;
+      font-family: Helvetica, Helvetica W01, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #696969;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      height: 80px;
       img {
-        width: 70px;
-        height: 40px;
+        width: 16px;
+        margin-right: 10px;
       }
-      button {
-        border: none;
-        background-color: transparent;
-        font-family: Helvetica, Helvetica W01, Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        color: #696969;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
+    }
+    @media (max-width: 1024px) {
+      .cand-text {
         img {
-          width: 16px;
-          margin-right: 10px;
+          margin-right: 0px;
+        }
+        span {
+          display: none;
+        }
+      }
+    }
+    @media (max-width: 640px) {
+      .house-text {
+        img {
+          margin-right: 0px;
+        }
+        span {
+          display: none;
         }
       }
     }
