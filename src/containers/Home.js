@@ -17,21 +17,18 @@ const Home = () => {
 
   useEffect(() => {
     const initializeFilters = () => {
-      let newCountries = {};
-      let newContracts = {};
-      let newJobs = {};
       let newCountriesFilters = {};
       let newContractsFilters = {};
       let newJobsFilters = {};
 
       for (let i = 0; i < data.length; i++) {
-        if (!newCountries.hasOwnProperty(data[i].country)) {
+        if (!newCountriesFilters.hasOwnProperty(data[i].country)) {
           newCountriesFilters[data[i].country] = false;
         }
-        if (!newContracts.hasOwnProperty(data[i].contract)) {
+        if (!newContractsFilters.hasOwnProperty(data[i].contract)) {
           newContractsFilters[data[i].contract] = false;
         }
-        if (!newJobs.hasOwnProperty(data[i].title)) {
+        if (!newJobsFilters.hasOwnProperty(data[i].title)) {
           newJobsFilters[data[i].title] = false;
         }
       }
